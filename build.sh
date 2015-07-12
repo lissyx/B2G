@@ -11,22 +11,22 @@ function configure_device() {
 
     # Make sure that our assumption that device codenames are unique
     # across vendors is true
-    if [ $(ls -d device/*/$DEVICE 2> /dev/null | wc -l) -gt 1 ] ; then
-        echo $DEVICE is ambiguous \"$(ls -d device/*/$DEVICE 2> /dev/null)\"
+    if [ $(ls -d $DEVICE_DIR 2> /dev/null | wc -l) -gt 1 ] ; then
+        echo $DEVICE_DIR is ambiguous \"$(ls -d $DEVICE_DIR 2> /dev/null)\"
         return 1
     fi
 
     # Select which blob setup script to use, if any.  We currently
-    # assume that $DEVICE maps to the filesystem location, which is true
+    # assume that $DEVICE_DIR maps to the filesystem location, which is true
     # for the devices we support now (oct 2012) that do not require blobs.
-    # The emulator uses a $DEVICE of 'emulator' but its device/ directory
+    # The emulator uses a $DEVICE_DIR of 'emulator' but its device/ directory
     # uses the 'goldfish' name.
-    if [ -f device/*/$DEVICE/download-blobs.sh ] ; then
-        important_files="device/*/$DEVICE/download-blobs.sh"
-        script="cd device/*/$DEVICE && ./download-blobs.sh"
-    elif [ -f device/*/$DEVICE/extract-files.sh ] ; then
-        important_files="device/*/$DEVICE/extract-files.sh"
-        script="cd device/*/$DEVICE && ./extract-files.sh"
+    if [ -f $DEVICE_DIR/download-blobs.sh ] ; then
+        important_files="$DEVICE_DIR/download-blobs.sh"
+        script="cd $DEVICE_DIR && ./download-blobs.sh"
+    elif [ -f $DEVICE_DIR/extract-files.sh ] ; then
+        important_files="$DEVICE_DIR/extract-files.sh"
+        script="cd $DEVICE_DIR && ./extract-files.sh"
     else
         important_files=
         script=
@@ -53,6 +53,7 @@ function configure_device() {
 }
 
 unset CDPATH
+. load-config.sh &&
 . setup.sh &&
 if [ -f patches/patch.sh ] ; then
     . patches/patch.sh

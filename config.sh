@@ -176,7 +176,15 @@ case "$1" in
 	repo_sync $1
 	;;
 
-"shinano"|"shinano-l")
+# Sony Xperia devices
+
+"shinano")
+	echo PRODUCT_NAME=shinano >> .tmp-config &&
+	repo_sync $1
+	;;
+
+"shinano-l")
+	echo DEVICE_DIR=device/sony/leo >> .tmp-config &&
 	echo PRODUCT_NAME=shinano >> .tmp-config &&
 	repo_sync $1
 	;;
