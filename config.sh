@@ -231,6 +231,7 @@ case "$1" in
 	echo - emulator-x86-kk
 	echo - emulator-x86-l
 	echo "> Sony Xperia devices"
+	echo - amami "Z1 Compact L"
 	echo - aries "(Z3 Compact KK)"
 	echo - aries-l "(Z3 Compact L)"
 	echo - leo-kk "(Z3 KK)"
