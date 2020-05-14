@@ -46,7 +46,8 @@ case $DEVICE in
         DEVICE_NAME=generic_x86_64
         ;;
     *)
-        DEVICE_NAME=generic
+        TARGET_ARCH=arm
+        TARGET_TRIPLE=arm-linux-androideabi
         ;;
 esac
 
